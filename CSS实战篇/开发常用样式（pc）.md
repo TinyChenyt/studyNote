@@ -131,3 +131,35 @@ clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%);
 flex-shrink: 0;
 ```
 
+## nth-child
+
+**父元素:nth-child**
+
+```css
+nth-child(even); // 选择偶数元素
+nth-child(odd); //选择奇数元素
+```
+
+## 修改滚动条样式
+
+**未兼容全部浏览器**
+
+```css
+.box::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.box::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.box::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+```
+
