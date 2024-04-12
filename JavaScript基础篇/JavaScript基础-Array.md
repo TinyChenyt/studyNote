@@ -146,12 +146,31 @@ console.log(`strArr: ${strArr}`);
 ```
 **11. forEach() 循环数组，为数组的每一个元素调用一次回调函数 用于遍历获取数组的值，不对原数组进行操作，不返回新数组**
 
+**若数组值为对象，则可改变对象中属性的值**
+
 ```js
 let arr = [10,5,4,1,23];
 
 arr.forEach((item, index) => {
     console.log(item, index);
 })
+
+let arr = [
+  {
+    name: 'a',
+    age: 1
+  },
+  {
+    name: 'b',
+    age: 2
+  }
+];
+
+arr.forEach(item => {
+  item.age = 'bc'
+})
+
+console.log(arr);
 ```
 **12. map() 循环数组，为数组的每一个元素调动一次回调函数 用于遍历数组，不对原数组进行操作，返回新数组**
 
