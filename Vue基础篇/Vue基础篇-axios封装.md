@@ -27,4 +27,27 @@ if (process.env.NODE_ENV === 'development') {
 
 ## 请求拦截
 
+```javascript
+axiosInstance.interceptors.request.use(
+  (config) => {
+  // 设置请求头
+    const userStore = useUserStoreHook();
+    if (userStore.token) {
+      config.headers.Authorization = userStore.token;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+)
+```
+
 ## 响应拦截
+
+```javascript
+axiosInstance.interceptors.response.use(
+  (response) => {}
+)
+```
+
