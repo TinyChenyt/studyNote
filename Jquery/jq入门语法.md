@@ -1,5 +1,6 @@
 # jq入门语法 #
 
+**通过$去获取节点，然后对节点进行操作**
 
 ## 入口函数  ##
 ```js
@@ -80,4 +81,36 @@ $('button').focus(function() {});
 
 // 失去焦点
 $('button').blur(function() {});
+```
+
+## 样式 ##
+```javascript
+// 获取样式
+$('button').css('color');
+// 设置样式
+$('button').css('color', 'red');
+// 设置类名
+$('button').addClass('btn');
+// 删除类名
+$('button').removeClass('btn');
+```
+
+## 替换值 ##
+```javascript
+// 获取值
+$('button').val();
+// 设置值
+$('button').val('按钮');
+// 获取html
+$('button').html();
+// 设置html
+$('button').html('<button>按钮</button>');
+// 获取文本
+$('button').text();
+// 设置文本
+$('button').text('按钮');
+// 获取属性
+$('button').attr('type');
+// 设置属性
+$('button').attr('type', 'button');
 ```

@@ -100,3 +100,5 @@ let a = new URLSearchParams('a=1&b=2');
 ```js
 fetch('a').then(res => {}).catch(err => {});
 ```
+
+- 拓展运算符

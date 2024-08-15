@@ -91,7 +91,11 @@ new Promise((resolve, reject) => {
 
 ### then
 
+then方法返回的是一个新的promise对象，所以可以链式调用，当resolve执行之后，then会触发
+
 ### catch
+
+catch方法在reject执行之后，会触发，reject传入的参数会作为catch的接收参数
 
 ### all
 
