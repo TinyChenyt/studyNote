@@ -48,6 +48,9 @@ nginx -t
 
 ![image-20240429113023494](https://tiny-blog.oss-cn-guangzhou.aliyuncs.com/blog/202404291130515.png)
 
+## 注意事项
+在腾讯云的centos中，可能默认安装了nginx，使用`find / -name nginx.conf`命令检查是否已存在nginx的配置文件，如果存在，则无需再安装nginx，对应的修改配置文件也需要再查找出来的nginx中进行配置。
+
 nginx.conf文件可参考
 
 ```shell
