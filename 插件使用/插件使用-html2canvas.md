@@ -1,7 +1,12 @@
 # 插件使用-html2canvas
 
-**将页面渲染为图片**
+**html2canvas，将页面对应节点渲染为图片，常用于分享图的构建**
+
 [官网](https://html2canvas.hertzen.com/)
+
+
+
+**注意：如果生成的图片过于模糊，除了通过修改生成的图片格式，对图片进行放大等操作外，还可以将模糊部分作为img节点导入而不是使用背景图片的格式**
 
 ## CDN使用
 推荐使用html2canvas.js，并且建议将文件下载到本地引入，方便修改插件源码。
@@ -61,3 +66,70 @@ CanvasRenderer.prototype.renderReplacedElement = function (container, curves, im
 };
 ```
 **该修改只能兼容object-fit, 对于其他object-系列样式，如object-position还是不支持，可以更换为其他样式**
+
+
+
+## 同时兼容cover和contain
+
+```js
+CanvasRenderer.prototype.renderReplacedElement = function (container, curves, image) {
+    // Start Custom Code
+    if (container.styles.objectFit == 'cover') {
+        if (image && container.intrinsicWidth > 0 && container.intrinsicHeight > 0) {
+            var box = contentBox(container);
+            var path = calculatePaddingBoxPath(curves);
+
+            this.path(path);
+            this.ctx.save();
+            this.ctx.clip();
+
+            let newWidth;
+            let newHeight;
+            let newX = box.left;
+            let newY = box.top;
+
+            if (container.intrinsicWidth / box.width < container.intrinsicHeight / box.height) {
+                newWidth = box.width;
+                newHeight = container.intrinsicHeight * (box.width / container.intrinsicWidth);
+                newY = box.top + (box.height - newHeight) / 2;
+            } else {
+                newWidth = container.intrinsicWidth * (box.height / container.intrinsicHeight);
+                newHeight = box.height;
+                newX = box.left + (box.width - newWidth) / 2;
+            }
+
+            this.ctx.drawImage(image, 0, 0, container.intrinsicWidth, container.intrinsicHeight, newX, newY, newWidth, newHeight);
+            this.ctx.restore();
+        }
+        return;
+    } else {
+        if (image && container.intrinsicWidth > 0 && container.intrinsicHeight > 0) {
+            var box = contentBox(container);
+            var path = calculatePaddingBoxPath(curves);
+
+            this.path(path);
+            this.ctx.save();
+            this.ctx.clip();
+
+            // 计算缩放比例，保持图片完整显示在容器内（contain效果）
+            var scale = Math.min(
+                box.width / container.intrinsicWidth,
+                box.height / container.intrinsicHeight
+            );
+
+            // 计算新尺寸
+            var newWidth = container.intrinsicWidth * scale;
+            var newHeight = container.intrinsicHeight * scale;
+
+            // 居中定位
+            var newX = box.left + (box.width - newWidth) / 2;
+            var newY = box.top + (box.height - newHeight) / 2;
+
+            this.ctx.drawImage(image, 0, 0, container.intrinsicWidth, container.intrinsicHeight, newX, newY, newWidth, newHeight);
+            this.ctx.restore();
+        }
+    }
+    // End Custom Code
+};
+```
+
