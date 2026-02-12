@@ -79,7 +79,7 @@ let res = Array.prototype.isPrototypeOf(arr) // true
 
 **null是定义了一个参数，参数的值为null**
 
-**undefined是已声明未定义（但在对象中，反问不存在的属性的返回值也是undefined）**
+**undefined是已声明未定义（但在对象中，访问不存在的属性的返回值也是undefined）**
 
 ```javascript
 let data1 = null;
